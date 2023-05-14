@@ -8,8 +8,8 @@ const { validarCampos } = require('../middlewares/validar-campos');
 const router = Router();
 
 router.post('/login', [
-    body('name', 'El nombre de usuario es obligatorio').not().isEmpty(),
-    body('password', 'La contraseña es obligatoria').not().isEmpty(),
+    body('name', 'El nombre de usuario es obligatorio').isEmpty(),
+    body('password', 'La contraseña es obligatoria').isEmpty(),
     validarCampos
 ], login)
 

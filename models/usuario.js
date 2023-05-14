@@ -17,8 +17,6 @@ const usuarioSchema = Schema({
         required: [true, 'La contraseña es obligatoria'],
     },
 
-    img: String,
-
     rol: {
         type: Schema.Types.ObjectId,
         ref: 'Role',

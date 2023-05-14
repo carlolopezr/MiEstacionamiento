@@ -13,14 +13,23 @@ const usuariosPost = async (req = request, res = response) => {
     // obtener rol id
     const rol_id = await Role.findOne({ rol })
 
-    const usuario = new Usuario({ name, correo, password, rol_id });
+    const data = {
+        name,
+        email: correo,
+        password,
+        rol: rol_id._id
+    }
+
+    console.log(data);
+
+    const usuario = new Usuario(data);
 
     // Encriptar contraseña
     // 10 por defecto
     const salt = bcryptjs.genSaltSync();
     usuario.password = bcryptjs.hashSync(password, salt)
 
-    // Guardar el usuario en bd
+    //Guardar el usuario en bd
     try {
         await usuario.save()
     } catch (error) {

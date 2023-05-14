@@ -1,21 +1,20 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
 
-const { validarCampos } = require('../middlewares/validar-campos')
+const { validarCampos } = require('../middlewares')
 
 const { usuariosPost } = require('../controllers/usuarios');
 
-const { emailExiste, existeUsuarioPorId, esRoleValido } = require('../helpers/db-validators');
+const { emailExiste, esRoleValido } = require('../helpers/db-validators');
 
 
 const router = Router();
 
 const validaciones = [
-    body('nombre', 'El nombre es requerido').not().isEmpty(),
+    body('name', 'El nombre es requerido').not().isEmpty(),
     body('correo', 'El correo no es válido').isEmail(),
     body('correo').custom(emailExiste),
     body('password', 'El password debe tener más de 6 caracteres').isLength({ min: 6 }),
-    // body('rol', 'No es un rol permitido').isIn(['ADMIN_ROLE', 'USER_ROLE'])
     body('rol').custom(esRoleValido),
     validarCampos]
 
