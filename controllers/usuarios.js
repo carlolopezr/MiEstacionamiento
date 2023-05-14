@@ -7,11 +7,13 @@ const Role = require('../models/role');
 
 const usuariosPost = async (req = request, res = response) => {
 
-    const { name, correo, password, rol = 'USER_ROLE' } = req.body;
+    const { name, correo, password } = req.body;
     // Instancia del usuario
+    const rol = 'USER_ROLE'
 
     // obtener rol id
     const rol_id = await Role.findOne({ rol })
+    console.log(rol_id);
 
     const data = {
         name,
