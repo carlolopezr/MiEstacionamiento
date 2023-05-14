@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
 
-const { validarCampos } = require('../middlewares')
+const { validarCampos, validarJWT } = require('../middlewares')
 
 const { usuariosPost } = require('../controllers/usuarios');
 
@@ -11,6 +11,7 @@ const { emailExiste, esRoleValido } = require('../helpers/db-validators');
 const router = Router();
 
 const validaciones = [
+    validarJWT,
     body('name', 'El nombre es requerido').not().isEmpty(),
     body('correo', 'El correo no es válido').isEmail(),
     body('correo').custom(emailExiste),
