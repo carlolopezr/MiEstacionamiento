@@ -23,8 +23,6 @@ const usuariosPost = async (req = request, res = response) => {
         rol: rol_id._id
     }
 
-    console.log(data);
-
     const usuario = new Usuario(data);
 
     // Encriptar contraseña
@@ -38,10 +36,13 @@ const usuariosPost = async (req = request, res = response) => {
         await usuario.save()
 
     } catch (error) {
-        console.log(error + 'AQUI ESTA');
+        return res.status(401).json({
+            msg: error
+        })
     }
 
-    const token = generarJWT(usuario.uid)
+    const token = await generarJWT(usuario._id)
+
 
 
     res.json({
