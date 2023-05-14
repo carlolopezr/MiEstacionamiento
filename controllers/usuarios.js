@@ -41,7 +41,8 @@ const usuariosPost = async (req = request, res = response) => {
         console.log(error + 'AQUI ESTA');
     }
 
-    const token = generarJWT(usuario._id)
+    const token = generarJWT(usuario.uid)
+
 
     res.json({
         usuario,
