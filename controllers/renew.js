@@ -2,7 +2,8 @@ const { generarJWT } = require("../helpers/generar-jwt");
 
 const revalidateToken = async (req, res = response) => {
     const usuario = req.usuario;
-    const token = await generarJWT(usuario.uid)
+    console.log(usuario);
+    const token = await generarJWT(usuario._id)
 
     res.json({
         ok: true,
