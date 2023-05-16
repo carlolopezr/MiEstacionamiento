@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { body } = require('express-validator');
 
 const { validarCampos } = require('../middlewares/validar-campos');
-const { estacionamientoPost } = require('../controllers/estacionamiento');
+const { estacionamientoPost, estacionamientosGet } = require('../controllers/estacionamiento');
 
 const router = Router();
 
@@ -18,6 +18,8 @@ router.post('/', [
     body('user', 'El usuario es obligatorio').not().isEmpty(),
     validarCampos
 ], estacionamientoPost)
+
+router.get('/', estacionamientosGet)
 
 
 module.exports = router
