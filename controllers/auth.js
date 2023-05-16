@@ -14,13 +14,13 @@ const login = async (req = request, res = response) => {
         const usuario = await Usuario.findOne({ name })
         if (!usuario) {
             return res.status(400).json({
-                msg: 'Usuario / Password no son correctos - correo'
+                msg: 'Usuario o Password incorrectos'
             })
         }
         //Verificar si el correo esta activo
         if (usuario.estado == false) {
             return res.status(400).json({
-                msg: 'Usuario / Password no son correctos - estado'
+                msg: 'El estado del usuario es inactivo'
             })
         }
 
@@ -28,7 +28,7 @@ const login = async (req = request, res = response) => {
         const validPassword = bcryptjs.compareSync(password, usuario.password)
         if (!validPassword) {
             return res.status(400).json({
-                msg: 'Usuario / Password no son correctos - Password'
+                msg: 'Usuario o Password no son correctos'
             })
         }
 
