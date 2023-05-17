@@ -12,7 +12,8 @@ class Server {
             auth: '/api/auth',
             usuarios: '/api/usuarios',
             renew: '/api/renew',
-            estacionamientos: '/api/estacionamientos'
+            estacionamientos: '/api/estacionamientos',
+            reservas: '/api/reservas'
         }
 
         // Conectar a base de datos
@@ -46,6 +47,7 @@ class Server {
         this.app.use(this.paths.usuarios, require('../routes/usuarios'));
         this.app.use(this.paths.renew, require('../routes/renew'));
         this.app.use(this.paths.estacionamientos, require('../routes/estacionamiento'));
+        this.app.use(this.paths.reservas, require('../routes/reserva'));
     }
 
     listen() {
